@@ -218,6 +218,65 @@ lexik_maintenance:
     response:
         code: 503
         status: "wallabag Service Temporarily Unavailable"
+        
+fos_elastica:
+     clients:
+         default: { host: %elastic_search_host%, port: %elastic_search_port% }
+     serializer:
+         serializer: serializer
+     indexes:
+         wallabag:
+             client: default
+             finder: ~
+             settings:
+                 index:
+                     analysis:
+                         analyzer:
+                             default:
+                                 type: standard
+                               trigrams:
+                                 type: custom,
+                                 tokenizer: standard
+                                 filter: ["lowercase","trigrams_filter"]
+                                 char_filter: html_strip
+                         filter:
+                             trigrams_filter:
+                                 type: ngram
+                                 min_gram: 3
+                                 max_gram: 3
+               types:
+                 Entry:
+                     mappings:
+                         title: {boost: 5 }
+                         url: {boost: 2 }
+                         content: ~
+                         createdAt: { type: date, format: basic_date_time }
+                         updatedAt: { type: date, format: basic_date_time }
+                         comments: {boost: 1 }
+                         domainName: {boost: 3 }
+                         tag:
+                             type: "object"
+                         user:
+                             type: "object"
+                     persistence:
+                         driver: orm
+                         model:  Wallabag\CoreBundle\Entity\Entry
+                         provider: ~
+                         listener: ~
+                         finder: ~
+                     properties:
+                         text:
+                             type: string
+                             analyzer: [trigrams,standard]
+                 Tag:
+                     mappings:
+                         label: {boost: 10}
+                     persistence:
+                         driver: orm
+                         model:  Wallabag\CoreBundle\Entity\Tag
+                         provider: ~
+                         listener: ~
+                         finder: ~
 
 old_sound_rabbit_mq:
     connections:
