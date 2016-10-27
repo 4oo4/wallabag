@@ -41,6 +41,10 @@ parameters:
     from_email: no-reply@wallabag.org
 
     rss_limit: 50
+    
+    elastic_search: true
+    elastic_search_host: localhost
+    elastic_search_port : 9200
 
     # RabbitMQ processing
     rabbitmq_host: localhost
