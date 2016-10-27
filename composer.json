@@ -78,6 +78,7 @@
         "craue/config-bundle": "~1.4",
         "mnapoli/piwik-twig-extension": "^1.0",
         "lexik/maintenance-bundle": "~2.1",
+        "friendsofsymfony/elastica-bundle": "^3.1"
         "ocramius/proxy-manager": "1.*",
         "white-october/pagerfanta-bundle": "^1.0",
         "php-amqplib/rabbitmq-bundle": "^1.8",
