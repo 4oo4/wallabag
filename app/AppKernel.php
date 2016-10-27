@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new Wallabag\ImportBundle\WallabagImportBundle(),
             new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
             new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+            new \FOS\ElasticaBundle\FOSElasticaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
